@@ -1,32 +1,14 @@
-# Tech Challenge - Pós-Tech SOAT - FIAP
+# Tech Challenge - Pós-Tech - FIAP
 
-Este é o projeto desenvolvido durante a fase I e atualizado durante a fase III do curso de pós-graduação em arquitetura de software da FIAP - turma II/2023.
+Projeto desenvolvido durante a fase I do curso de pós-graduação em Arquitetura e Desenvolvimento em JAVA - 8ADJT.
 
-Membros do grupo 30:
-Diórgenes Eugênio da Silveira - RM 349116
-Elton de Andrade Rodrigues - RM 349353
-Gabriel Mendes - RM 348989
-Juliana Amoasei dos Reis - RM 348666
+Membros do grupo 39:
+Daniel Santello - RM 348666
 
 ## Repositórios
 
-Infraestrutura da API principal e do banco de dados com Terraform e Kubernetes:
-https://github.com/diorgeneseugenio/fiap-tech-challenge-soat-terraform
-
 API principal:
-https://github.com/diorgeneseugenio/fiap-tech-challenge-soat
-
-Serviço de autenticação via funções Lambda:
-https://github.com/JulianaAmoasei/fiap-auth-service-cognito
-
-### Changelog Fase III:
-- **[Estrutura do Projeto](#estrutura-do-projeto)**: Refatoração do projeto para exigir autenticação de usuários via JWT para acesso aos endpoints;
-- **Implementação de serviço Lambda** para gerenciamento de usuários utilizando AWS Cognito e autenticação via token JWT:
-  - **clientes do restaurante** via CPF válido para iniciar o fluxo de pedido;
-  - **usuários admin** para acesso a endpoints de inclusão, alteração e exclusão de produtos e categorias;
-- **Refatoração do sistema de infraestrutura** com provisionamento de recursos e implantação automatizados via Kubernetes e Terraform;
-- **Migração do banco de dados da API principal** para o AWS RDS;
-- **Gerenciamento de deploy** automatizado via GitHub Actions.
+https://github.com/danielsantello/fiap-tech-challenge
 
 ## Propósito do projeto
 
@@ -34,19 +16,9 @@ Fornecer um sistema para gerenciamento de pedidos para uma empresa do ramo de se
 
 ## Stack utilizada
 
-* Node.js v18
-* TypeScript 
 * MySQL
-* Express
-* Sequelize
 * Docker
 * Kubernetes
-* AWS
-  * RDS
-  * Lambda
-  * Cognito
-  * API Gateway
-
 
 ## Instalação do projeto
 
@@ -100,31 +72,26 @@ kubectl apply -f k8s/api/api.deployment.yaml
 kubectl apply -f k8s/api/api.svc.yaml
 ```
 
-A API estará pronta para receber requisições a partir da URL base http://localhost:30080/.
-**OBS**: Caso a URL base não esteja disponível em `localhost`, execute o comando `minikube ip` no terminal e utilize o IP disponibilizado no lugar de `localhost`. Exemplo: `192.168.49.2:30080/api/produto`.
+A API estará pronta para receber requisições a partir da URL base http://localhost:8080/.
+**OBS**: Caso a URL base não esteja disponível em `localhost`, execute o comando `minikube ip` no terminal e utilize o IP disponibilizado no lugar de `localhost`. Exemplo: `192.168.49.2:8080/api/produto`.
 
 
 ### Docker Compose
 
-Utilize o comando `docker compose up` para "construir" (*build*) e subir o servidor local, expondo a porta 3000 em `localhost`. Além do container da `api` também subirá o serviço `db` com o banco de dados de desenvolvimento.
+Utilize o comando `docker compose up` para "construir" (*build*) e subir o servidor local, expondo a porta 8080 em `localhost`. Além do container da `api` também subirá o serviço `db` com o banco de dados de desenvolvimento.
 
-**IMPORTANTE:** Esta API está programada para ser acessada a partir de `http://localhost:3000` e o banco de dados utiliza a porta `3306`. Certifique-se de que não existam outros recursos ocupando as portas `3000` e `3306` antes de subir o projeto.
+**IMPORTANTE:** Esta API está programada para ser acessada a partir de `http://localhost:8080` e o banco de dados utiliza a porta `3306`. Certifique-se de que não existam outros recursos ocupando as portas `8080` e `3306` antes de subir o projeto.
 
 Para derrubar o serviço, execute o comando `docker compose down`.
-
-## Utilizacao
-
-Os projeto cria o metodo de pagamento no banco(QR Code) e as categorias padrão quando iniciado.
 
 ### Endpoints
 
 Esta API fornece documentação no padrão OpenAPI.
 Os endpoints disponíveis, suas descrições e dados necessários para requisição podem ser consultados e testados em ```/api-docs```.
 
-### 1. Cadastrar Produtos
+### 1. Cadastrar Usuários
 
-1.1 O projeto já cria as principais categorias(Lanche, Acompanhamento, Bebida, Sobremesa);
-1.2 - Cadastro do produto:
+1.1 - Cadastro do usuário:
 ```json
 {
   "nome": "produto 1",
