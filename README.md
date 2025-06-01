@@ -28,20 +28,32 @@ Caso não tenha o Docker instalado, siga as instruções para seu sistema operac
 Para executar em ambiente de desenvolvimento:
 
 * Faça o `fork` e `clone` este repositório em seu computador;
+
+``` bash
+git clone https://github.com/danielsantello/fiap-tech-challenge.git
+```
+
 * Entre no diretório local onde o repositório foi clonado;
 
+``` bash
+cd fiap-tech-challenge
+```
 
-### Docker Compose
+``` bash
+docker-compose up --build
+```
 
-Utilize o comando `docker compose up` para "construir" (*build*) e subir o servidor local, expondo a porta 8080 em `localhost`. Além do container da `api` também subirá o serviço `db` com o banco de dados de desenvolvimento.
+O comando anterior subirá o servidor local, expondo a porta 8080 em `localhost`. Além do container da `api` também subirá o serviço `db` com o banco de dados de desenvolvimento.
 
 **IMPORTANTE:** Esta API está programada para ser acessada a partir de `http://localhost:8080` e o banco de dados utiliza a porta `3306`. Certifique-se de que não existam outros recursos ocupando as portas `8080` e `3306` antes de subir o projeto.
 
-Para derrubar o serviço, execute o comando `docker compose down`.
+Para derrubar o serviço, execute o comando:
+
+``` bash
+docker compose down
+```
 
 ### Endpoints
 
 Esta API fornece documentação no padrão OpenAPI.
-Os endpoints disponíveis, suas descrições e dados necessários para requisição podem ser consultados e testados em ```/api-docs```.
-
-
+Os endpoints disponíveis, suas descrições e dados necessários para requisição podem ser consultados e testados em `http://localhost:8080/swagger-ui/index.html`.
