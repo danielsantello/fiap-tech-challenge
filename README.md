@@ -1,6 +1,6 @@
 # Tech Challenge - Pós-Tech - FIAP
 
-Curso de pós-graduação em Arquitetura e Desenvolvimento em JAVA - Turma 8ADJT.
+Curso de pós-graduação em Arquitetura e Desenvolvimento em JAVA - Turma 8ADJT - Fase I.
 
 ## Repositórios
 
