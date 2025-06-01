@@ -15,19 +15,19 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
-#  app:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    container_name: api
-#    depends_on:
-#      - mysql
-#    ports:
-#      - "8080:8080"
-#    environment:
-#      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/tech-challenge
-#      SPRING_DATASOURCE_USERNAME: admin
-#      SPRING_DATASOURCE_PASSWORD: 5qtX6EUZLFhdzni6
-#
-#volumes:
-#  mysql_data:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/tech-challenge
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: 5qtX6EUZLFhdzni6
+
+volumes:
+  mysql_data:
