@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
 import br.com.dalq.fiap_tech_challenge.dtos.UsuarioRequestDTO;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,11 +22,17 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class Usuario {
+    @Schema(description = "Identificador único do usuário")
     private Long id;
+    @Schema(description = "Nome completo do usuário")
     private String nome;
+    @Schema(description = "E-mail do usuário")
     private String email;
+    @Schema(description = "Login utilizado para acesso ao sistema")
     private String login;
+    @Schema(description = "Senha utilizada para acesso ao sistema")
     private String senha;
+    @Schema(description = "Data da última atualização do registro")
     private LocalDateTime ultima_alteracao;
 
     public Usuario(UsuarioRequestDTO usuarioRequestDTO) {

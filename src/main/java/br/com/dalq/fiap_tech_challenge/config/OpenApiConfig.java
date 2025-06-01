@@ -13,8 +13,8 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI locaTech() {
         return new OpenAPI()
-                .info(new Info().title("Locatech API")
-                    .description("Projeto desenvolvido por Daniel Santello")
+                .info(new Info().title("Sistema de Gestão para Restaurantes")
+                    .description("Projeto desenvolvido por Daniel Santello - RM 358435")
                     .version("1.0.0")
                     .license(new License()
                             .name("Licença Free")

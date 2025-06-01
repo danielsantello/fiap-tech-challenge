@@ -5,6 +5,8 @@ import br.com.dalq.fiap_tech_challenge.entities.Usuario;
 import br.com.dalq.fiap_tech_challenge.services.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
+@Tag(name = "Usuários", description = "Gerencia os usuários do sistema")
 public class UsuarioController {
     private static final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 
@@ -24,63 +27,99 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    // http://localhost:8080/usuarios?page=1 (query params)
-    // http://localhost:8080/usuarios?page=1&size=10 (query params)
+    // http://localhost:8080/usuarios
+    // http://localhost:8080/usuarios?page=1
+    // http://localhost:8080/usuarios?page=1&size=10
     @GetMapping
     @Operation(
-            description = "Busca todos os veículos",
-            summary = "Busca Todos",
+            description = "Retorna um conjunto de usuários. É possível definir a página e o tamanho dela, através das querys strings page e size respectivamente.",
+            summary = "Busca todos os usuários",
             responses = {
                     @ApiResponse(
-                            description = "Operation Responses Message",
                             responseCode = "200"
                     )
             }
     )
     public ResponseEntity<List<Usuario>> findAllUsuarios(
-            @RequestParam("page") int page,
-            @RequestParam("size") int size
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "10") int size
     ) {
         logger.info("GET /usuarios");
-        var usuarios = this.usuarioService.findAllUsuarios(page, size);
+        var usuarios = this.usuarioService.findAll(page, size);
         return ResponseEntity.ok(usuarios);
     }
 
     // http://localhost:8080/usuarios/1 (path params)
     @GetMapping("/{id}")
+    @Operation(
+            description = "Retorna os dados do usuário do id informado",
+            summary = "Busca um usuário",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200"
+                    )
+            }
+    )
     public ResponseEntity<Optional<Usuario>> findUsuario(
             @PathVariable("id") Long id
     ) {
         logger.info("GET /usuarios/" + id);
-        var usuario = this.usuarioService.findUsuarioById(id);
+        var usuario = this.usuarioService.findById(id);
         return ResponseEntity.ok(usuario);
     }
 
     @PostMapping
+    @Operation(
+            description = "Cria um novo usuário",
+            summary = "Cria um novo usuário",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201"
+                    )
+            }
+    )
     public ResponseEntity<Void> saveUsuario(
-            @RequestBody UsuarioRequestDTO usuarioRequestDTO
+            @Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO
     ) {
         logger.info("POST /usuarios");
-        this.usuarioService.saveUsuario(usuarioRequestDTO);
+        this.usuarioService.save(usuarioRequestDTO);
         return ResponseEntity.status(201).build();
     }
 
     @PutMapping("/{id}")
+    @Operation(
+            description = "Altera os dados do usuário do id informado",
+            summary = "Altera um usuário",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201"
+                    )
+            }
+    )
     public ResponseEntity<Void> updateUsuario(
             @PathVariable("id") Long id,
-            @RequestBody UsuarioRequestDTO usuarioRequestDTO
+            @Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO
     ) {
         logger.info("PUT /usuarios/" + id);
-        this.usuarioService.updateUsuario(usuarioRequestDTO, id);
+        this.usuarioService.update(usuarioRequestDTO, id);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
+    @Operation(
+            description = "Exclui o usuário do id informado",
+            summary = "Exclui um usuário",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200"
+                    )
+            }
+    )
     public ResponseEntity<Void> deleteUsuario(
             @PathVariable("id") Long id
     ) {
         logger.info("DELETE /usuarios/" + id);
-        this.usuarioService.deleteUsuario(id);
+        this.usuarioService.delete(id);
         return ResponseEntity.ok().build();
     }
 }
