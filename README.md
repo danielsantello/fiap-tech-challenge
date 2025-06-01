@@ -24,7 +24,7 @@ Este projeto está pronto para ser executado em um ambiente Docker. Por este mot
 
 Caso não tenha o Docker instalado, siga as instruções para seu sistema operacional na [documentação oficial do Docker](https://docs.docker.com/get-docker/).
 
-Para executar em ambiente de desenvolvimento:
+Para executar o projeto, siga os passos abaixo:
 
 Clone o código desse repositório em seu computador:
 
@@ -37,6 +37,7 @@ Entre no diretório local onde o repositório foi clonado:
 ``` bash
 cd fiap-tech-challenge
 ```
+
 Suba as aplicações com o comando:
 
 ``` bash
