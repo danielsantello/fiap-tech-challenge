@@ -1,10 +1,9 @@
 # Tech Challenge - Pós-Tech - FIAP
 
-Curso de Pós-Graduação em Arquitetura e Desenvolvimento em JAVA - Turma 8ADJT - Fase I.
+Curso de Pós-Graduação em Arquitetura e Desenvolvimento em JAVA - Turma 8ADJT - Fase I
 
 ## Repositório
 
-API principal:
 https://github.com/danielsantello/fiap-tech-challenge
 
 ## Propósito do projeto
