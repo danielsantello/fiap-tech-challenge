@@ -11,7 +11,7 @@ https://github.com/danielsantello/fiap-tech-challenge
 
 Desenvolver um backend completo e robusto utilizando o framework Spring Boot, com foco no gerenciamento de usuários, incluindo operações de criação, atualização, exclusão e validação de login. O projeto será configurado para rodar em um ambiente Docker, utilizando Docker Compose, o que permitirá a orquestração dos serviços e a integração com um banco de dados relacional, como PostgreSQL, MySQL ou H2. A configuração com Docker Compose garantirá que a aplicação seja facilmente replicável e escalável, permitindo a implantação em diversos ambientes de forma consistente e eficiente. Além disso, o projeto será desenvolvido seguindo as melhores práticas de arquitetura e segurança, de modo que o sistema seja não apenas funcional, mas também seguro, escalável e de fácil manutenção
 
-## Tecnologias utilizada
+## Tecnologias utilizadas
 
 * Spring Boot
 * MySQL
