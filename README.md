@@ -27,17 +27,18 @@ Caso não tenha o Docker instalado, siga as instruções para seu sistema operac
 
 Para executar em ambiente de desenvolvimento:
 
-* Faça o `fork` e `clone` este repositório em seu computador;
+Clone o código desse repositório em seu computador:
 
 ``` bash
 git clone https://github.com/danielsantello/fiap-tech-challenge.git
 ```
 
-* Entre no diretório local onde o repositório foi clonado;
+Entre no diretório local onde o repositório foi clonado:
 
 ``` bash
 cd fiap-tech-challenge
 ```
+Suba as aplicações com o comando:
 
 ``` bash
 docker-compose up --build
