@@ -2,7 +2,7 @@
 
 Curso de Pós-Graduação em Arquitetura e Desenvolvimento em JAVA - Turma 8ADJT - Fase I.
 
-## Repositórios
+## Repositório
 
 API principal:
 https://github.com/danielsantello/fiap-tech-challenge
