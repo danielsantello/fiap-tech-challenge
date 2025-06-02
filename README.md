@@ -61,4 +61,4 @@ Os endpoints disponíveis, suas descrições e dados necessários para requisiç
 
 ### Testes e Integrações
 
-Uma collection do Postman, com todas as chamadas da API, está disponível na pasta postman do projeto e também pode ser importada da URL `http://dalq.com.br/postman_collection.json`
+Uma collection do Postman, com todas as chamadas da API, está disponível na pasta postman do projeto e também pode ser importada da URL `https://dalqsistemas.com.br/postman_collection.json`
