@@ -10,9 +10,13 @@ public interface UsuarioRepository {
 
     Optional<Usuario> findById(long id);
 
+    Optional<Usuario> findByLoginSenha(String login, String senha);
+
     Integer save(Usuario usuario);
 
     Integer update(Usuario usuario, Long id);
 
     Integer delete(Long id);
+
+    Integer setPassword(Long id, String password);
 }

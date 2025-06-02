@@ -1,6 +1,10 @@
 package br.com.dalq.fiap_tech_challenge.controllers;
 
+import br.com.dalq.fiap_tech_challenge.context.OnCreate;
+import br.com.dalq.fiap_tech_challenge.context.OnUpdate;
 import br.com.dalq.fiap_tech_challenge.dtos.UsuarioRequestDTO;
+import br.com.dalq.fiap_tech_challenge.dtos.UsuarioSetPasswordDTO;
+import br.com.dalq.fiap_tech_challenge.dtos.ValidationLoginDTO;
 import br.com.dalq.fiap_tech_challenge.entities.Usuario;
 import br.com.dalq.fiap_tech_challenge.services.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,6 +14,7 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -79,7 +84,7 @@ public class UsuarioController {
             }
     )
     public ResponseEntity<Void> saveUsuario(
-            @Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO
+            @Validated(OnCreate.class) @RequestBody UsuarioRequestDTO usuarioRequestDTO
     ) {
         logger.info("POST /usuarios");
         this.usuarioService.save(usuarioRequestDTO);
@@ -98,7 +103,7 @@ public class UsuarioController {
     )
     public ResponseEntity<Void> updateUsuario(
             @PathVariable("id") Long id,
-            @Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO
+            @Validated(OnUpdate.class) @RequestBody UsuarioRequestDTO usuarioRequestDTO
     ) {
         logger.info("PUT /usuarios/" + id);
         this.usuarioService.update(usuarioRequestDTO, id);
@@ -120,6 +125,43 @@ public class UsuarioController {
     ) {
         logger.info("DELETE /usuarios/" + id);
         this.usuarioService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/login")
+    @Operation(
+            description = "Valida se existe o usuário e senha cadastrados no banco",
+            summary = "Validar login e senha",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200"
+                    )
+            }
+    )
+    public ResponseEntity<Void> validateLogin(
+            @Valid @RequestBody ValidationLoginDTO validationLoginDTO
+    ) {
+        logger.info("POST /validateLogin");
+        this.usuarioService.validateLogin(validationLoginDTO);
+        return ResponseEntity.status(200).build();
+    }
+
+    @PutMapping("/password/{id}")
+    @Operation(
+            description = "Altera a senha do usuário do id informado",
+            summary = "Altera uma senha",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200"
+                    )
+            }
+    )
+    public ResponseEntity<Void> setPassword(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody UsuarioSetPasswordDTO usuarioSetPasswordDTO
+            ) {
+        logger.info("PUT /usuarios/password" + id);
+        this.usuarioService.setPassword(usuarioSetPasswordDTO, id);
         return ResponseEntity.ok().build();
     }
 }

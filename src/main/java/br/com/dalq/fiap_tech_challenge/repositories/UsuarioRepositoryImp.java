@@ -4,6 +4,7 @@ import br.com.dalq.fiap_tech_challenge.entities.Usuario;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,9 +37,20 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
     }
 
     @Override
+    public Optional<Usuario> findByLoginSenha(String login, String senha) {
+        return this.jdbcClient
+                .sql("select * from usuarios where login = :login and senha = :senha")
+                .param("login", login)
+                .param("senha", senha)
+                .query(Usuario.class)
+                .optional();
+    }
+
+    @Override
     public Integer save(Usuario usuario) {
         return this.jdbcClient
-                .sql("insert into usuarios (nome, email, login, senha, ultima_alteracao) values (:nome, :email, :login, :senha, :ultima_alteracao)")
+                .sql("insert into usuarios (tipo, nome, email, login, senha, ultima_alteracao) values (:tipo, :nome, :email, :login, :senha, :ultima_alteracao)")
+                .param("tipo", usuario.getTipo())
                 .param("nome", usuario.getNome())
                 .param("email", usuario.getEmail())
                 .param("login", usuario.getLogin())
@@ -50,11 +62,11 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
     @Override
     public Integer update(Usuario usuario, Long id) {
         return this.jdbcClient
-                .sql("update usuarios set nome = :nome, email = :email, login = :login, senha = :senha, ultima_alteracao = :ultima_alteracao where id = :id")
+                .sql("update usuarios set tipo = :tipo, nome = :nome, email = :email, login = :login, ultima_alteracao = :ultima_alteracao where id = :id")
+                .param("tipo", usuario.getTipo())
                 .param("nome", usuario.getNome())
                 .param("email", usuario.getEmail())
                 .param("login", usuario.getLogin())
-                .param("senha", usuario.getSenha())
                 .param("ultima_alteracao", usuario.getUltima_alteracao())
                 .param("id", id)
                 .update();
@@ -64,6 +76,16 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
     public Integer delete(Long id) {
         return this.jdbcClient
                 .sql("delete from usuarios where id = :id")
+                .param("id", id)
+                .update();
+    }
+
+    @Override
+    public Integer setPassword(Long id, String password) {
+        return this.jdbcClient
+                .sql("update usuarios set senha = :senha, ultima_alteracao = :ultima_alteracao where id = :id")
+                .param("senha", password)
+                .param("ultima_alteracao", LocalDateTime.now())
                 .param("id", id)
                 .update();
     }

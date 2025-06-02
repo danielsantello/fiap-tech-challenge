@@ -1,9 +1,5 @@
 package br.com.dalq.fiap_tech_challenge.entities;
 
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
 import br.com.dalq.fiap_tech_challenge.dtos.UsuarioRequestDTO;
@@ -24,6 +20,8 @@ import lombok.ToString;
 public class Usuario {
     @Schema(description = "Identificador único do usuário")
     private Long id;
+    @Schema(description = "Tipo do usuário")
+    private String tipo;
     @Schema(description = "Nome completo do usuário")
     private String nome;
     @Schema(description = "E-mail do usuário")
@@ -36,17 +34,10 @@ public class Usuario {
     private LocalDateTime ultima_alteracao;
 
     public Usuario(UsuarioRequestDTO usuarioRequestDTO) {
+        this.tipo = usuarioRequestDTO.tipo();
         this.nome = usuarioRequestDTO.nome();
         this.email = usuarioRequestDTO.email();
         this.login = usuarioRequestDTO.login();
         this.ultima_alteracao = LocalDateTime.now();
-
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = digest.digest(usuarioRequestDTO.senha().getBytes(StandardCharsets.UTF_8));
-            this.senha = String.format("%064x", new BigInteger(1, hashBytes));
-        } catch (NoSuchAlgorithmException ignored) {
-
-        }
     }
 }

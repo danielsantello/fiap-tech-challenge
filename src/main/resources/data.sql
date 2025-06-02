@@ -1,14 +1,15 @@
 create table if not exists usuarios(
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    tipo varchar(255),
     nome varchar(255),
     email varchar(255),
-    login varchar(255),
+    login varchar(255) unique,
     senha varchar(255),
     ultima_alteracao timestamp
 );
 
-insert into usuarios (nome, email, login, senha, ultima_alteracao)
-select 'Administrador', 'admin@dalq.com.br', 'admin', SHA2('123456', 256), current_timestamp()
+insert into usuarios (tipo, nome, email, login, senha, ultima_alteracao)
+select 'RESTAURANTE', 'Restaurante São João', 'restaurantesaojoao@gmail.com', 'restaurantesaojoao', SHA2('123456', 256), current_timestamp()
  where not exists (select 1 from usuarios);
 
 create table if not exists enderecos(
