@@ -58,3 +58,7 @@ docker compose down
 
 Esta API fornece documentação no padrão OpenAPI.
 Os endpoints disponíveis, suas descrições e dados necessários para requisição podem ser consultados e testados em `http://localhost:8080/swagger-ui/index.html`.
+
+### Testes e Integrações
+
+Uma collection do Postman, com todas as chamadas da API, está disponível na pasta postman do projeto e também pode ser importada da URL `http://dalq.com.br/postman_collection.json`
